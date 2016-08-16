@@ -19,7 +19,7 @@ import mks.co.mg.activities.MainActivity;
  */
 public class CommonUtilities {
 
-    public static boolean isConnectingToInternet(Context context) {
+    public static boolean isConnectedToInternet(Context context) {
         try {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();

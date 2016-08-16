@@ -11,14 +11,14 @@ import okhttp3.Response;
 /**
  * Created by Mahesh on 13/8/16.
  */
-public class CachingControlInterceptor implements Interceptor{
+public class CachingControlInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
         // Add Cache Control only for GET methods
         if (request.method().equals("GET")) {
-            if (CommonUtilities.isConnectingToInternet(GameApplication.context)) {
+            if (CommonUtilities.isConnectedToInternet(GameApplication.context)) {
                 // 1 day
                 request = request.newBuilder()
                         .header("Cache-Control", "only-if-cached")

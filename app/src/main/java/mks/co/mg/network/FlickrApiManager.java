@@ -46,7 +46,7 @@ public class FlickrApiManager {
         public Response intercept(Chain chain) throws IOException {
             Response originalResponse = chain.proceed(chain.request());
             // max-age = 86400 = 1 day and max-stale=2419200 = 4 weeks
-            String cacheHeaderValue = CommonUtilities.isConnectingToInternet(GameApplication.context)
+            String cacheHeaderValue = CommonUtilities.isConnectedToInternet(GameApplication.context)
                     ? "public, max-age=86400"
                     : "public, only-if-cached, max-stale=2419200";
             return originalResponse.newBuilder()
@@ -99,7 +99,7 @@ public class FlickrApiManager {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (CommonUtilities.isConnectingToInternet(GameApplication.context)) {
+                if (CommonUtilities.isConnectedToInternet(GameApplication.context)) {
                     request = request.newBuilder().header("Cache-Control", "only-if-cached").build();
                 } else {
                     CacheControl cacheControl = new CacheControl.Builder()
